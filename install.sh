@@ -15,3 +15,14 @@ fi
 if ! command -v claude >/dev/null 2>&1 && [ ! -x ~/.local/bin/claude ]; then
     curl -fsSL https://claude.ai/install.sh | bash
 fi
+
+# GitHub CLI (skip if already installed)
+if ! command -v gh >/dev/null 2>&1; then
+    sudo apt install -y gh
+fi
+
+# GitHub login (skip if already logged in)
+if ! gh auth status -h github.com >/dev/null 2>&1; then
+    gh auth login -h github.com -p https --web
+fi
+
