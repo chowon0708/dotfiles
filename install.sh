@@ -16,6 +16,12 @@ if ! command -v claude >/dev/null 2>&1 && [ ! -x ~/.local/bin/claude ]; then
     curl -fsSL https://claude.ai/install.sh | bash
 fi
 
+command -v jq >/dev/null 2>&1 || sudo apt install -y jq
+mkdir -p ~/.claude
+[ -f ~/.claude/settings.json ] || echo '{}' > ~/.claude/settings.json
+jq '.attribution = {"commit": "", "pr": "", "sessionUrl": false}' ~/.claude/settings.json > ~/.claude/settings.json.tmp \
+    && mv ~/.claude/settings.json.tmp ~/.claude/settings.json
+
 # Git identity (noreply email so commits link to GitHub without exposing a real address)
 git config --global user.name "Shinwon Lee"
 git config --global user.email "150661623+chowon0708@users.noreply.github.com"
