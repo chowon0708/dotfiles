@@ -16,6 +16,10 @@ if ! command -v claude >/dev/null 2>&1 && [ ! -x ~/.local/bin/claude ]; then
     curl -fsSL https://claude.ai/install.sh | bash
 fi
 
+# Git identity (noreply email so commits link to GitHub without exposing a real address)
+git config --global user.name "Shinwon Lee"
+git config --global user.email "150661623+chowon0708@users.noreply.github.com"
+
 # GitHub CLI (skip if already installed)
 if ! command -v gh >/dev/null 2>&1; then
     sudo apt install -y gh
