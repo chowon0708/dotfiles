@@ -1,6 +1,15 @@
 #!/bin/bash
+
+# Stop at the first error (-e), treat unset variables as errors (-u),
+# and fail a pipeline if any command in it fails (pipefail).
+set -euo pipefail
+
 # The folder this script is in, so it works wherever you clone the repo
 DIR="$(cd "$(dirname "$0")" && pwd)"
+
+# Basic packages (a fresh EC2 machine needs `apt update` before any install)
+sudo apt update
+sudo apt install -y git curl tmux jq
 
 # tmux config
 ln -sf "$DIR/tmux.conf" ~/.tmux.conf
